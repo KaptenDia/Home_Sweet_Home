@@ -139,7 +139,7 @@ class DetailPage extends StatelessWidget {
                     right: 21,
                   ),
                   child: Text(
-                    '4.5',
+                    product.rating.toString(),
                     style: priceTextStyle.copyWith(
                       fontSize: 18,
                     ),

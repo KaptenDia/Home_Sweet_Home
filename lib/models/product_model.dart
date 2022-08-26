@@ -42,7 +42,7 @@ List<Product> products = [
     image: 'assets/images/i3.png',
     detailImage: 'assets/images/image3.png',
     title: 'Coffe Chair',
-    price: 'Rp. 7790.00',
+    price: 'Rp. 77.900',
     review: 71,
     description:
         'Dengan design minimalis dan simple Coffe Chair sangat cocok untuk anda yang ingin memiliki sebuah kursi yang fungsinya untuk duduk bersantay dengan meneguk sebuah coffe panas.tidak hanya itu saja untuk anda yang ingin membuka coffe shop Coffe Chair ini cocok unduk dijadikan sebagai kursi customer.',

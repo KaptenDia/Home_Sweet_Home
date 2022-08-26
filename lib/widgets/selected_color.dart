@@ -2,15 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../theme.dart';
 
-class ColorDot extends StatelessWidget {
-  final Color color;
+class SelectedColor extends StatelessWidget {
   bool isSelected = false;
-
-  ColorDot({
-    Key? key,
-    required this.color,
-    this.isSelected = false,
-  }) : super(key: key);
+  final Color color;
+  SelectedColor({Key? key, required this.color, this.isSelected = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

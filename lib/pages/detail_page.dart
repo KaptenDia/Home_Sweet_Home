@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:home_sweet_home/theme.dart';
+import 'package:home_sweet_home/widgets/selected_color.dart';
 
 import '../models/product_model.dart';
 import '../widgets/cart_counter.dart';
-import '../widgets/color_dot.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   final Product product;
-  const DetailPage({Key? key, required this.product}) : super(key: key);
+  DetailPage({Key? key, required this.product}) : super(key: key);
 
+  @override
+  State<DetailPage> createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
   Widget detailImage(BuildContext context) {
+    int isSelected = 0;
     return SafeArea(
       child: Stack(
         children: [
@@ -30,7 +36,7 @@ class DetailPage extends StatelessWidget {
                 ),
                 image: DecorationImage(
                   image: AssetImage(
-                    product.detailImage,
+                    widget.product.detailImage,
                   ),
                   alignment: Alignment.centerRight,
                   fit: BoxFit.fill,
@@ -76,14 +82,14 @@ class DetailPage extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    ColorDot(
+                    SelectedColor(
                       color: whiteColor,
                       isSelected: true,
                     ),
-                    ColorDot(
+                    SelectedColor(
                       color: Color(0xffB4916C),
                     ),
-                    ColorDot(
+                    SelectedColor(
                       color: Color(0xffE4CBAD),
                     ),
                   ],
@@ -105,7 +111,7 @@ class DetailPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            product.title,
+            widget.product.title,
             style: titleTextStyle.copyWith(
               fontSize: 24,
               fontWeight: semiBold,
@@ -118,7 +124,7 @@ class DetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                product.price,
+                widget.product.price,
                 style: priceTextStyle.copyWith(
                   fontSize: 30,
                 ),
@@ -139,14 +145,14 @@ class DetailPage extends StatelessWidget {
                     right: 21,
                   ),
                   child: Text(
-                    product.rating.toString(),
+                    widget.product.rating.toString(),
                     style: priceTextStyle.copyWith(
                       fontSize: 18,
                     ),
                   ),
                 ),
                 Text(
-                  '(${product.review} Reviews)',
+                  '(${widget.product.review} Reviews)',
                   style: descriptionTextStyle.copyWith(
                     fontWeight: semiBold,
                   ),
@@ -161,7 +167,7 @@ class DetailPage extends StatelessWidget {
             width: 325,
             height: 125,
             child: Text(
-              product.description,
+              widget.product.description,
               style: descriptionTextStyle.copyWith(
                 fontWeight: light,
               ),

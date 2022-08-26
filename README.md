@@ -1,4 +1,4 @@
-# Home_Sweet_Home
+# Home_Sweet_Home / Flutter App
 
 A new Flutter project.
 

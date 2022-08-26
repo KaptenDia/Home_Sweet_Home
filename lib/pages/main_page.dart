@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_sweet_home/pages/favorites_page.dart';
 import 'package:home_sweet_home/pages/profile_page.dart';
 import 'package:home_sweet_home/theme.dart';
 
@@ -85,7 +86,7 @@ class _MainPageState extends State<MainPage> {
         return const HomePage();
         break;
       case 1:
-        return const HomePage();
+        return const FavoritesPage();
         break;
       case 2:
         return const HomePage();

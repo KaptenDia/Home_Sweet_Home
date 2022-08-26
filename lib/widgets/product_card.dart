@@ -1,3 +1,5 @@
+import 'package:home_sweet_home/pages/favorites_page.dart';
+
 import '../models/product_model.dart';
 import '../theme.dart';
 import 'Package:flutter/material.dart';

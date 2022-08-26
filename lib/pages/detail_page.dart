@@ -189,17 +189,22 @@ class _DetailPageState extends State<DetailPage> {
       ),
       child: Row(
         children: [
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                12,
-              ),
-              color: Color(0xffF0F0F0),
-              image: DecorationImage(
-                image: AssetImage(
-                  'assets/icon/marker 2.png',
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, 'FavoritesPage');
+            },
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  12,
+                ),
+                color: Color(0xffF0F0F0),
+                image: DecorationImage(
+                  image: AssetImage(
+                    'assets/icon/marker 2.png',
+                  ),
                 ),
               ),
             ),

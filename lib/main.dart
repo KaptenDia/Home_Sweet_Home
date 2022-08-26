@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_sweet_home/pages/favorites_page.dart';
 import 'package:home_sweet_home/pages/login_page.dart';
 import 'package:home_sweet_home/pages/main_page.dart';
 import 'package:home_sweet_home/pages/signup_page.dart';
@@ -21,6 +22,7 @@ class Main extends StatelessWidget {
         'LoginPage': (context) => const LoginPage(),
         'SignupPage': (context) => const SignupPage(),
         'home': (context) => const MainPage(),
+        'FavoritesPage': (context) => const FavoritesPage(),
       },
     );
   }

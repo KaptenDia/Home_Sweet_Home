@@ -65,13 +65,64 @@ class FavoritesPage extends StatelessWidget {
 
     Widget content() {
       return Expanded(
-        child: Container(
-          child: ListView(
-              children: favoriteProvider.favorite
-                  .map(
-                    (product) => FavoriteCard(product),
-                  )
-                  .toList()),
+        child: Column(
+          children: [
+            Container(
+              height: 600,
+              child: ListView(
+                  children: favoriteProvider.favorite
+                      .map(
+                        (product) => FavoriteCard(product),
+                      )
+                      .toList()),
+            ),
+            Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 50,
+                  margin: EdgeInsets.symmetric(
+                    horizontal: defaultMargin,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(
+                      8,
+                    ),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: blueColor,
+                      ),
+                      onPressed: () {},
+                      child: Text(
+                        'Add all to my cart',
+                        style: buttonTextStyle.copyWith(
+                          fontSize: 18,
+                          fontWeight: semiBold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget emptyContent() {
+      return Expanded(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Text(
+                  'No Favorite Items founds',
+                ),
+              ),
+            ],
+          ),
         ),
       );
     }
@@ -79,7 +130,7 @@ class FavoritesPage extends StatelessWidget {
     return Column(
       children: [
         header(),
-        content(),
+        favoriteProvider.favorite.length == 0 ? emptyContent() : content(),
       ],
     );
   }

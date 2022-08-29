@@ -206,6 +206,9 @@ class _DetailPageState extends State<DetailPage> {
                         'Has been added to the favorite',
                         textAlign: TextAlign.center,
                       ),
+                      duration: Duration(
+                        seconds: 1,
+                      ),
                     ),
                   );
                 } else {
@@ -214,6 +217,9 @@ class _DetailPageState extends State<DetailPage> {
                       content: Text(
                         'Has been removed from the favorite',
                         textAlign: TextAlign.center,
+                      ),
+                      duration: Duration(
+                        seconds: 1,
                       ),
                     ),
                   );

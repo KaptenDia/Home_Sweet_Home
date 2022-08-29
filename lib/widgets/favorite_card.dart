@@ -88,7 +88,9 @@ class FavoriteCard extends StatelessWidget {
                 child: Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        favoriteProvider.setProduct(product);
+                      },
                       child: Image.asset(
                         'assets/icon/cancel.png',
                         color: blackColor,

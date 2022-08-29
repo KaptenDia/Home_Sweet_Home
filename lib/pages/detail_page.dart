@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:home_sweet_home/providers/favorite_provider.dart';
 import 'package:home_sweet_home/theme.dart';
 import 'package:home_sweet_home/widgets/selected_color.dart';
+import 'package:provider/provider.dart';
 
 import '../models/product_model.dart';
 import '../widgets/cart_counter.dart';
@@ -180,70 +182,94 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  Widget button() {
-    return Container(
-      width: 325,
-      height: 60,
-      margin: EdgeInsets.symmetric(
-        horizontal: 25,
-      ),
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, 'FavoritesPage');
-            },
-            child: Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  12,
-                ),
-                color: Color(0xffF0F0F0),
-                image: DecorationImage(
-                  image: AssetImage(
-                    'assets/icon/marker 2.png',
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(
-                left: 15,
-              ),
-              height: 60,
-              width: 250,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: blueColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                onPressed: () {},
-                child: Text(
-                  'Add to cart',
-                  style: buttonTextStyle.copyWith(
-                    fontWeight: semiBold,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 25,
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    FavoriteProvider favoriteProvider = Provider.of<FavoriteProvider>(context);
+
+    Widget button() {
+      return Container(
+        width: 325,
+        height: 60,
+        margin: EdgeInsets.symmetric(
+          horizontal: 25,
+        ),
+        child: Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                favoriteProvider.setProduct(widget.product);
+
+                if (favoriteProvider.isFavorite(widget.product)) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Has been added to the favorite',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Has been removed from the favorite',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  );
+                }
+              },
+              child: Container(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    12,
+                  ),
+                  color: Color(0xffF0F0F0),
+                  image: DecorationImage(
+                    image: AssetImage(
+                      favoriteProvider.isFavorite(widget.product)
+                          ? 'assets/icon/favorite1.png'
+                          : 'assets/icon/marker 2.png',
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(
+                  left: 15,
+                ),
+                height: 60,
+                width: 250,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: blueColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    'Add to cart',
+                    style: buttonTextStyle.copyWith(
+                      fontWeight: semiBold,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 25,
+            ),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       body: ListView(
         children: [

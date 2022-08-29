@@ -33,6 +33,7 @@ class ProductCard extends StatelessWidget {
                   Text(
                     product.title,
                     style: descriptionTextStyle1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(
                     height: 3,

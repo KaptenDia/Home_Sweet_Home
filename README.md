@@ -6,7 +6,7 @@ A new Flutter project.
 
 This project is a starting point for a Flutter application.
 
-In this project im using some state management currently using provider state management
+In this project im using some state management currently using provider state management and setState.
 
 
 ## Some Screenshots

@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:home_sweet_home/models/product_model.dart';
-import 'package:home_sweet_home/providers/favorite_provider.dart';
+import 'package:home_sweet_home/models/cart_model.dart';
+import 'package:home_sweet_home/providers/cart_provider.dart';
+import 'package:home_sweet_home/widgets/cart_counter.dart';
 import 'package:provider/provider.dart';
 
 import '../theme.dart';
 
-class FavoriteCard extends StatelessWidget {
-  FavoriteCard(this.product);
-  final Product product;
+class CartCard extends StatelessWidget {
+  const CartCard(this.cart, {Key? key}) : super(key: key);
+
+  final CartModel cart;
 
   @override
   Widget build(BuildContext context) {
-    FavoriteProvider favoriteProvider = Provider.of<FavoriteProvider>(context);
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
+
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 20,
-      ),
       padding: EdgeInsets.only(
         top: 14,
       ),
@@ -33,15 +33,15 @@ class FavoriteCard extends StatelessWidget {
                   ),
                   image: DecorationImage(
                     image: AssetImage(
-                      product.image,
+                      cart.product.image,
                     ),
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
               Container(
-                width: 125,
-                height: 100,
+                width: 165,
+                height: 120,
                 margin: EdgeInsets.only(
                   left: 20,
                   right: 23,
@@ -56,7 +56,7 @@ class FavoriteCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                product.title,
+                                cart.product.title,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                                 style: descriptionTextStyle.copyWith(
@@ -67,10 +67,50 @@ class FavoriteCard extends StatelessWidget {
                                 height: 8,
                               ),
                               Text(
-                                'Rp. ${product.price}',
+                                'Rp. ${cart.product.price}',
                                 style: priceTextStyle.copyWith(
                                   fontSize: 16,
                                   fontWeight: bold,
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(
+                                  top: defaultMargin,
+                                ),
+                                child: Row(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        cartProvider.addQuantity(cart.id);
+                                      },
+                                      child: Image.asset(
+                                        'assets/icon/plus.png',
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Text(
+                                      cart.quantity.toString().padLeft(
+                                            2,
+                                            '0',
+                                          ),
+                                      style: priceTextStyle.copyWith(
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        cartProvider.reduceQuantity(cart.id);
+                                      },
+                                      child: Image.asset(
+                                        'assets/icon/minus.png',
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -83,35 +123,23 @@ class FavoriteCard extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.only(
-                  left: 65,
+                  left: 35,
                 ),
                 child: Column(
                   children: [
                     GestureDetector(
                       onTap: () {
-                        favoriteProvider.setProduct(product);
+                        cartProvider.removeCart(cart.id);
                       },
                       child: Image.asset(
                         'assets/icon/cancel.png',
                         color: blackColor,
                       ),
                     ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Image.asset(
-                        'assets/icon/bag2.png',
-                      ),
-                    ),
                   ],
                 ),
               ),
             ],
-          ),
-          SizedBox(
-            height: 12,
           ),
           Container(
             margin: EdgeInsets.symmetric(

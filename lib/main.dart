@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:home_sweet_home/pages/cart_page.dart';
 import 'package:home_sweet_home/pages/favorites_page.dart';
 import 'package:home_sweet_home/pages/login_page.dart';
 import 'package:home_sweet_home/pages/main_page.dart';
 import 'package:home_sweet_home/pages/signup_page.dart';
 import 'package:home_sweet_home/pages/splash_page.dart';
+import 'package:home_sweet_home/providers/cart_provider.dart';
 import 'package:home_sweet_home/providers/favorite_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +24,9 @@ class Main extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => FavoriteProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => CartProvider(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -31,6 +36,7 @@ class Main extends StatelessWidget {
           'SignupPage': (context) => const SignupPage(),
           'home': (context) => const MainPage(),
           'FavoritesPage': (context) => const FavoritesPage(),
+          'CartPage': (context) => const CartPage(),
         },
       ),
     );

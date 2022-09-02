@@ -39,7 +39,7 @@ class ProductCard extends StatelessWidget {
                     height: 3,
                   ),
                   Text(
-                    product.price,
+                    'Rp. ${product.price}',
                     style: priceTextStyle,
                   ),
                 ],

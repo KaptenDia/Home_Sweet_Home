@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_sweet_home/providers/cart_provider.dart';
 import 'package:home_sweet_home/providers/favorite_provider.dart';
 import 'package:home_sweet_home/theme.dart';
 import 'package:home_sweet_home/widgets/selected_color.dart';
@@ -126,12 +127,16 @@ class _DetailPageState extends State<DetailPage> {
           Row(
             children: [
               Text(
-                widget.product.price,
+                'Rp. ${widget.product.price}',
                 style: priceTextStyle.copyWith(
                   fontSize: 30,
                 ),
               ),
-              CartCounter(),
+              Padding(
+                  padding: EdgeInsets.only(
+                    left: 25,
+                  ),
+                  child: CartCounter()),
             ],
           ),
           Container(
@@ -185,6 +190,7 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     FavoriteProvider favoriteProvider = Provider.of<FavoriteProvider>(context);
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
 
     Widget button() {
       return Container(
@@ -257,7 +263,9 @@ class _DetailPageState extends State<DetailPage> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    cartProvider.addCart(widget.product);
+                  },
                   child: Text(
                     'Add to cart',
                     style: buttonTextStyle.copyWith(

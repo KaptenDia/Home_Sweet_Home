@@ -42,8 +42,13 @@ class HomePage extends StatelessWidget {
             'assets/icon/search.png',
           ),
           actions: [
-            Image.asset(
-              'assets/icon/cart.png',
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, 'CartPage');
+              },
+              child: Image.asset(
+                'assets/icon/cart.png',
+              ),
             ),
           ],
         ),
@@ -219,7 +224,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
       );
-    }    
+    }
 
     return ListView(
       scrollDirection: Axis.vertical,

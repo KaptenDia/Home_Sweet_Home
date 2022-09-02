@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_sweet_home/models/cart_model.dart';
 
 import '../theme.dart';
 
@@ -14,10 +15,8 @@ class _CartCounterState extends State<CartCounter> {
 
   @override
   Widget build(BuildContext context) {
+    final CartModel cart;
     return Container(
-      margin: EdgeInsets.only(
-        left: 21,
-      ),
       child: Row(
         children: [
           IconButton(

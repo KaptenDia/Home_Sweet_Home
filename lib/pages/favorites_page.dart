@@ -51,11 +51,16 @@ class FavoritesPage extends StatelessWidget {
               padding: EdgeInsets.only(
                 right: 16,
               ),
-              child: Image.asset(
-                'assets/icon/cart.png',
-                color: blackColor,
-                width: 20,
-                height: 20,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, 'CartPage');
+                },
+                child: Image.asset(
+                  'assets/icon/cart.png',
+                  color: blackColor,
+                  width: 20,
+                  height: 20,
+                ),
               ),
             ),
           ],
@@ -70,11 +75,12 @@ class FavoritesPage extends StatelessWidget {
             Container(
               height: 600,
               child: ListView(
-                  children: favoriteProvider.favorite
-                      .map(
-                        (product) => FavoriteCard(product),
-                      )
-                      .toList()),
+                children: favoriteProvider.favorite
+                    .map(
+                      (product) => FavoriteCard(product),
+                    )
+                    .toList(),
+              ),
             ),
             Stack(
               children: [

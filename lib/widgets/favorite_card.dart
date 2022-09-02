@@ -3,6 +3,7 @@ import 'package:home_sweet_home/models/product_model.dart';
 import 'package:home_sweet_home/providers/favorite_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/cart_provider.dart';
 import '../theme.dart';
 
 class FavoriteCard extends StatelessWidget {
@@ -12,6 +13,7 @@ class FavoriteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FavoriteProvider favoriteProvider = Provider.of<FavoriteProvider>(context);
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 20,
@@ -100,7 +102,18 @@ class FavoriteCard extends StatelessWidget {
                       height: 40,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        cartProvider.addCart(product);
+                        favoriteProvider.setProduct(product);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Yay! The items has been added to cart!',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        );
+                      },
                       child: Image.asset(
                         'assets/icon/bag2.png',
                       ),

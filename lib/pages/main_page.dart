@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:home_sweet_home/pages/favorites_page.dart';
+import 'package:home_sweet_home/pages/login_page.dart';
 import 'package:home_sweet_home/pages/profile_page.dart';
 import 'package:home_sweet_home/theme.dart';
 

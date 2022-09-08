@@ -1,5 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:home_sweet_home/models/product_model.dart';
 import 'package:home_sweet_home/pages/cart_page.dart';
 import 'package:home_sweet_home/pages/favorites_page.dart';
 import 'package:home_sweet_home/pages/login_page.dart';
@@ -10,7 +10,9 @@ import 'package:home_sweet_home/providers/cart_provider.dart';
 import 'package:home_sweet_home/providers/favorite_provider.dart';
 import 'package:provider/provider.dart';
 
-void main(List<String> args) {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const Main());
 }
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "161033919419",
+    "project_id": "home-sweet-home-fcba3",
+    "storage_bucket": "home-sweet-home-fcba3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161033919419:android:7b4cd40e87e4d67a68c29e",
+        "android_client_info": {
+          "package_name": "com.emud.home_sweet_home"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "161033919419-gnvc5o3lt7n63nbiob29nrrj6alg7klb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIh3dVFAHbsu6CSSHrvN6Qr9n_QXN-X2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "161033919419-gnvc5o3lt7n63nbiob29nrrj6alg7klb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

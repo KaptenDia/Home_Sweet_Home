@@ -1,5 +1,7 @@
 // ignore_for_file: sort_child_properties_last
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:home_sweet_home/theme.dart';
 
@@ -11,6 +13,75 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  // text controller
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  Future signIn() async {
+    try {
+      if (_emailController.text.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Please Enter Your Email !',
+                textAlign: TextAlign.center,
+                style: descriptionTextStyle.copyWith(
+                  color: whiteColor,
+                  fontWeight: light,
+                )),
+            duration: Duration(
+              milliseconds: 1500,
+            ),
+          ),
+        );
+      } else if (_passwordController.text.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Please Enter Your Password !',
+                textAlign: TextAlign.center,
+                style: descriptionTextStyle.copyWith(
+                  fontWeight: light,
+                  color: whiteColor,
+                )),
+            duration: Duration(
+              milliseconds: 1500,
+            ),
+          ),
+        );
+      } else {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+        Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+      }
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Incorrect Password Or Email',
+            textAlign: TextAlign.center,
+            style: descriptionTextStyle.copyWith(
+              fontWeight: light,
+              color: whiteColor,
+            ),
+          ),
+          duration: Duration(
+            milliseconds: 2000,
+          ),
+        ),
+      );
+      print('Incorrect Password Or Email');
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   bool tap = false;
 
   Widget header() {
@@ -113,6 +184,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             TextField(
+              controller: _emailController,
               style: descriptionTextStyle.copyWith(
                 color: blackColor,
               ),
@@ -139,6 +211,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             TextField(
+              controller: _passwordController,
               style: descriptionTextStyle.copyWith(
                 color: blackColor,
               ),
@@ -200,10 +273,7 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: TextButton(
-                    onPressed: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, 'home', (route) => false);
-                    },
+                    onPressed: signIn,
                     child: Text(
                       'Log in',
                       style: buttonTextStyle.copyWith(

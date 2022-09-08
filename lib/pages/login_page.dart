@@ -113,7 +113,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             TextField(
-              style: descriptionTextStyle,
+              style: descriptionTextStyle.copyWith(
+                color: blackColor,
+              ),
               decoration: const InputDecoration(
                 fillColor: Color(0xffE0E0E0),
                 focusedBorder: UnderlineInputBorder(
@@ -137,7 +139,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             TextField(
-              style: descriptionTextStyle,
+              style: descriptionTextStyle.copyWith(
+                color: blackColor,
+              ),
               decoration: InputDecoration(
                 fillColor: const Color(0xffE0E0E0),
                 focusedBorder: const UnderlineInputBorder(
@@ -152,12 +156,12 @@ class _LoginPageState extends State<LoginPage> {
                     });
                   },
                   icon: Icon(
-                    tap ? Icons.visibility_off : Icons.remove_red_eye_outlined,
+                    tap ? Icons.remove_red_eye_outlined : Icons.visibility_off,
                   ),
                   color: blackColor,
                 ),
               ),
-              obscureText: tap,
+              obscureText: tap ? false : true,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

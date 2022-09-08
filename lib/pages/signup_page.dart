@@ -98,7 +98,9 @@ class _SignupPageState extends State<SignupPage> {
               ),
             ),
             TextField(
-              style: descriptionTextStyle,
+              style: descriptionTextStyle.copyWith(
+                color: blackColor,
+              ),
               decoration: const InputDecoration(
                 fillColor: Color(0xffE0E0E0),
                 focusedBorder: UnderlineInputBorder(
@@ -120,7 +122,9 @@ class _SignupPageState extends State<SignupPage> {
               ),
             ),
             TextField(
-              style: descriptionTextStyle,
+              style: descriptionTextStyle.copyWith(
+                color: blackColor,
+              ),
               decoration: const InputDecoration(
                 fillColor: Color(0xffE0E0E0),
                 focusedBorder: UnderlineInputBorder(
@@ -144,7 +148,9 @@ class _SignupPageState extends State<SignupPage> {
               ),
             ),
             TextField(
-              style: descriptionTextStyle,
+              style: descriptionTextStyle.copyWith(
+                color: blackColor,
+              ),
               decoration: InputDecoration(
                 fillColor: const Color(0xffE0E0E0),
                 focusedBorder: const UnderlineInputBorder(
@@ -159,12 +165,12 @@ class _SignupPageState extends State<SignupPage> {
                     });
                   },
                   icon: Icon(
-                    tap ? Icons.visibility_off : Icons.remove_red_eye_outlined,
+                    tap ? Icons.remove_red_eye_outlined : Icons.visibility_off,
                   ),
                   color: blackColor,
                 ),
               ),
-              obscureText: tap,
+              obscureText: tap ? false : true,
             ),
             Container(
               margin: const EdgeInsets.only(
@@ -180,7 +186,9 @@ class _SignupPageState extends State<SignupPage> {
               ),
             ),
             TextField(
-              style: descriptionTextStyle,
+              style: descriptionTextStyle.copyWith(
+                color: blackColor,
+              ),
               decoration: InputDecoration(
                 fillColor: const Color(0xffE0E0E0),
                 focusedBorder: const UnderlineInputBorder(
@@ -195,12 +203,12 @@ class _SignupPageState extends State<SignupPage> {
                     });
                   },
                   icon: Icon(
-                    tap2 ? Icons.visibility_off : Icons.remove_red_eye_outlined,
+                    tap2 ? Icons.remove_red_eye_outlined : Icons.visibility_off,
                   ),
                   color: blackColor,
                 ),
               ),
-              obscureText: tap2,
+              obscureText: tap2 ? false : true,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

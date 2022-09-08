@@ -71,6 +71,8 @@ class CartPage extends StatelessWidget {
 
     Widget content() {
       return ListView(
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
         padding: EdgeInsets.symmetric(
           horizontal: 20,
         ),
@@ -82,12 +84,74 @@ class CartPage extends StatelessWidget {
       );
     }
 
+    Widget customBottomNavBar() {
+      return Container(
+        height: 180,
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: defaultMargin,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Total:',
+                    style: descriptionTextStyle.copyWith(
+                      fontSize: 20,
+                      fontWeight: bold,
+                    ),
+                  ),
+                  Text(
+                    'Rp. ${cartProvider.totalPrice()}',
+                    style: descriptionTextStyle.copyWith(
+                      color: blackColor,
+                      fontWeight: bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            Container(
+              width: double.infinity,
+              height: 60,
+              margin: EdgeInsets.only(
+                left: 20,
+                right: 20,
+                bottom: defaultMargin,
+              ),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: blueColor,
+                ),
+                onPressed: () {},
+                child: Text(
+                  'Check Out',
+                  style: buttonTextStyle.copyWith(
+                    fontWeight: semiBold,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70),
         child: header(),
       ),
       body: cartProvider.carts.isEmpty ? emptyCart() : content(),
+      bottomNavigationBar:
+          cartProvider.carts.isEmpty ? SizedBox() : customBottomNavBar(),
     );
   }
 }

@@ -6,6 +6,7 @@ Color greyColor = const Color(0xff606060);
 Color whiteColor = const Color(0xffFFFFFF);
 Color transgreyColor = const Color(0xff808080);
 Color blackColor = const Color(0xff303030);
+Color warningColor = const Color(0xffE72F2F);
 
 double defaultMargin = 30;
 

@@ -22,15 +22,18 @@ class _LoginPageState extends State<LoginPage> {
       if (_emailController.text.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Please Enter Your Email !',
-                textAlign: TextAlign.center,
-                style: descriptionTextStyle.copyWith(
-                  color: whiteColor,
-                  fontWeight: light,
-                )),
+            content: Text(
+              'Please Enter Your Email !',
+              textAlign: TextAlign.center,
+              style: descriptionTextStyle.copyWith(
+                color: whiteColor,
+                fontWeight: bold,
+              ),
+            ),
             duration: Duration(
               milliseconds: 1500,
             ),
+            backgroundColor: warningColor,
           ),
         );
       } else if (_passwordController.text.isEmpty) {
@@ -39,12 +42,13 @@ class _LoginPageState extends State<LoginPage> {
             content: Text('Please Enter Your Password !',
                 textAlign: TextAlign.center,
                 style: descriptionTextStyle.copyWith(
-                  fontWeight: light,
+                  fontWeight: bold,
                   color: whiteColor,
                 )),
             duration: Duration(
               milliseconds: 1500,
             ),
+            backgroundColor: warningColor,
           ),
         );
       } else {
@@ -61,13 +65,14 @@ class _LoginPageState extends State<LoginPage> {
             'Incorrect Password Or Email',
             textAlign: TextAlign.center,
             style: descriptionTextStyle.copyWith(
-              fontWeight: light,
+              fontWeight: bold,
               color: whiteColor,
             ),
           ),
           duration: Duration(
             milliseconds: 2000,
           ),
+          backgroundColor: warningColor,
         ),
       );
       print('Incorrect Password Or Email');

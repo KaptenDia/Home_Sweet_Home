@@ -81,6 +81,7 @@ class CartProvider with ChangeNotifier {
     for (var item in _carts) {
       total += (item.quantity * item.product.price);
     }
+    return total;
   }
 
   productExist(Product product) {

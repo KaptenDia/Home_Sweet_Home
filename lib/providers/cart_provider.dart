@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:home_sweet_home/widgets/favorite_card.dart';
 
 import '../models/cart_model.dart';
 import '../models/product_model.dart';
@@ -31,8 +32,26 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  removeCart(int id) {
-    _carts.removeAt(id);
+  addAllToMyCart(Product product) {
+    if (productExist(product)) {
+      int index =
+          _carts.indexWhere((element) => element.product.id == product.id);
+      _carts[index].quantity++;
+    } else {
+      _carts.add(
+        CartModel(
+          id: _carts.length,
+          product: product,
+          quantity: 1,
+        ),
+      );
+    }
+
+    notifyListeners();
+  }
+
+  removeCart(int? id) {
+    _carts.removeAt(0);
     notifyListeners();
   }
 
@@ -44,7 +63,7 @@ class CartProvider with ChangeNotifier {
   reduceQuantity(int id) {
     _carts[id].quantity--;
     if (_carts[id].quantity == 0) {
-      _carts.removeAt(id);
+      removeCart(id);
     }
     notifyListeners();
   }

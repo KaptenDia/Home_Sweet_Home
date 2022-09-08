@@ -86,7 +86,7 @@ class _MainPageState extends State<MainPage> {
         return const HomePage();
         break;
       case 1:
-        return const FavoritesPage();
+        return FavoritesPage();
         break;
       case 2:
         return const HomePage();

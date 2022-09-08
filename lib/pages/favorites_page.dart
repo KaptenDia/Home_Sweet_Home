@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_sweet_home/models/product_model.dart';
+import 'package:home_sweet_home/pages/cart_page.dart';
+import 'package:home_sweet_home/providers/cart_provider.dart';
 import 'package:home_sweet_home/providers/favorite_provider.dart';
 import 'package:home_sweet_home/widgets/favorite_card.dart';
 import 'package:provider/provider.dart';
@@ -7,11 +9,14 @@ import 'package:provider/provider.dart';
 import '../theme.dart';
 
 class FavoritesPage extends StatelessWidget {
-  const FavoritesPage({Key? key}) : super(key: key);
+  const FavoritesPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     FavoriteProvider favoriteProvider = Provider.of<FavoriteProvider>(context);
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
 
     Widget header() {
       return Container(
@@ -136,7 +141,7 @@ class FavoritesPage extends StatelessWidget {
     return Column(
       children: [
         header(),
-        favoriteProvider.favorite.length == 0 ? emptyContent() : content(),
+        favoriteProvider.favorite.isEmpty ? emptyContent() : content(),
       ],
     );
   }

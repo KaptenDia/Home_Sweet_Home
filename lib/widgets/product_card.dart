@@ -1,4 +1,7 @@
+import 'package:home_sweet_home/pages/cart_page.dart';
 import 'package:home_sweet_home/pages/favorites_page.dart';
+import 'package:home_sweet_home/providers/cart_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../models/product_model.dart';
 import '../theme.dart';
@@ -13,6 +16,7 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
     return GestureDetector(
       onTap: press,
       child: Stack(
@@ -65,7 +69,40 @@ class ProductCard extends StatelessWidget {
                 top: 160,
               ),
               child: IconButton(
-                onPressed: () {},
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text(
+                      'Are You Sure To Add This Item Into The Cart ?',
+                      style: priceTextStyle,
+                      textAlign: TextAlign.center,
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          cartProvider.addCart(product);
+                          Navigator.popAndPushNamed(
+                            context,
+                            'CartPage',
+                          );
+                        },
+                        child: Text(
+                          'Yes',
+                          style: subtitleTextStyle,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          'No',
+                          style: subtitleTextStyle,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 icon: Image.asset(
                   'assets/icon/bag.png',
                 ),

@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:home_sweet_home/models/product_model.dart';
 import 'package:home_sweet_home/pages/detail_page.dart';
+import 'package:home_sweet_home/providers/cart_provider.dart';
 import 'package:home_sweet_home/theme.dart';
 import 'package:home_sweet_home/widgets/product_card.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Widget header() {
@@ -46,8 +53,29 @@ class HomePage extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(context, 'CartPage');
               },
-              child: Image.asset(
-                'assets/icon/cart.png',
+              child: Container(
+                width: 30,
+                height: 30,
+                margin: EdgeInsets.only(
+                  top: 10,
+                  right: 20,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Image.asset(
+                          'assets/icon/dot.png',
+                        ),
+                        Image.asset(
+                          'assets/icon/cart.png',
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

@@ -4,34 +4,6 @@ import 'package:home_sweet_home/theme.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
-  Widget header() {
-    return Container(
-      margin: const EdgeInsets.only(
-        top: 10,
-      ),
-      child: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          'Profile',
-          style: subtitleTextStyle.copyWith(
-            fontSize: 16,
-            fontWeight: bold,
-          ),
-        ),
-        leading: Image.asset(
-          'assets/icon/search.png',
-        ),
-        actions: [
-          Image.asset(
-            'assets/icon/exit.png',
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget profile() {
     return Container(
       margin: const EdgeInsets.only(
@@ -330,6 +302,40 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget header() {
+      return Container(
+        margin: const EdgeInsets.only(
+          top: 10,
+        ),
+        child: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: true,
+          title: Text(
+            'Profile',
+            style: subtitleTextStyle.copyWith(
+              fontSize: 16,
+              fontWeight: bold,
+            ),
+          ),
+          leading: Image.asset(
+            'assets/icon/search.png',
+          ),
+          actions: [
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, 'LoginPage', (route) => false);
+              },
+              child: Image.asset(
+                'assets/icon/exit.png',
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     return ListView(
       children: [
         header(),

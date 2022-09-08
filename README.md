@@ -8,6 +8,8 @@ This project is a starting point for a Flutter application.
 
 In this project im using some state management currently using provider state management and setState.
 
+<img src="https://img.icons8.com/color/48/000000/firebase.png" width = "15px" height = "15px"/>Authentication Login User With Firebase!
+
 
 ## Some Screenshots
 

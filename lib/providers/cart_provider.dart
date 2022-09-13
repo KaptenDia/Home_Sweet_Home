@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:home_sweet_home/widgets/favorite_card.dart';
 
 import '../models/cart_model.dart';
 import '../models/product_model.dart';

@@ -90,8 +90,10 @@ class CartPage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: defaultMargin,
+              margin: EdgeInsets.only(
+                left: defaultMargin,
+                right: defaultMargin,
+                top: 24,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

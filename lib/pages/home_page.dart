@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:home_sweet_home/models/product_model.dart';
 import 'package:home_sweet_home/pages/detail_page.dart';
-import 'package:home_sweet_home/providers/cart_provider.dart';
 import 'package:home_sweet_home/theme.dart';
 import 'package:home_sweet_home/widgets/product_card.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

@@ -17,6 +17,7 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  int numOfItems = 1;
   Widget detailImage(BuildContext context) {
     int isSelected = 0;
     return SafeArea(
@@ -133,10 +134,52 @@ class _DetailPageState extends State<DetailPage> {
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.only(
-                    left: 25,
+                padding: EdgeInsets.only(
+                  left: 25,
+                ),
+                child: Container(
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            numOfItems++;
+                          });
+                        },
+                        icon: Image.asset(
+                          'assets/icon/plus.png',
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 15,
+                        ),
+                        child: Text(
+                          numOfItems.toString().padLeft(
+                                2,
+                                '0',
+                              ),
+                          style: priceTextStyle.copyWith(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          if (numOfItems > 1) {
+                            setState(() {
+                              numOfItems--;
+                            });
+                          }
+                        },
+                        icon: Image.asset(
+                          'assets/icon/minus.png',
+                        ),
+                      ),
+                    ],
                   ),
-                  child: CartCounter()),
+                ),
+              ),
             ],
           ),
           Container(

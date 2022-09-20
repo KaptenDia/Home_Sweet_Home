@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:home_sweet_home/models/cart_model.dart';
+import 'package:home_sweet_home/models/product_model.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/cart_provider.dart';
 import '../theme.dart';
 
 class CartCounter extends StatefulWidget {
-  CartCounter({Key? key}) : super(key: key);
+  const CartCounter(this.cart, {Key? key}) : super(key: key);
+  final CartModel cart;
 
   @override
   State<CartCounter> createState() => _CartCounterState();
@@ -15,7 +19,7 @@ class _CartCounterState extends State<CartCounter> {
 
   @override
   Widget build(BuildContext context) {
-    final CartModel cart;
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
     return Container(
       child: Row(
         children: [

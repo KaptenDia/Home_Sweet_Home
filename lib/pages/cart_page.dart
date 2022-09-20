@@ -86,9 +86,48 @@ class CartPage extends StatelessWidget {
 
     Widget customBottomNavBar() {
       return Container(
-        height: 180,
+        height: 205,
+        padding: EdgeInsets.only(
+          top: 10,
+        ),
         child: Column(
           children: [
+            Container(
+              width: double.infinity,
+              height: 44,
+              margin: EdgeInsets.symmetric(
+                horizontal: defaultMargin,
+              ),
+              child: Material(
+                elevation: 1,
+                color: Color(0xffFCFCFC),
+                child: TextFormField(
+                  style: descriptionTextStyle.copyWith(
+                    color: greyColor,
+                    fontSize: 16,
+                  ),
+                  decoration: InputDecoration(
+                    suffixIcon: GestureDetector(
+                      onTap: () {},
+                      child: Image.asset(
+                        'assets/icon/prmt.png',
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    fillColor: whiteColor,
+                    hintText: 'Enter your promo code',
+                    hintStyle: descriptionTextStyle.copyWith(
+                      color: greyColor,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+            ),
             Container(
               margin: EdgeInsets.only(
                 left: defaultMargin,
@@ -125,7 +164,7 @@ class CartPage extends StatelessWidget {
               margin: EdgeInsets.only(
                 left: 20,
                 right: 20,
-                bottom: defaultMargin,
+                bottom: 20,
               ),
               child: TextButton(
                 style: TextButton.styleFrom(
@@ -147,6 +186,7 @@ class CartPage extends StatelessWidget {
     }
 
     return Scaffold(
+      backgroundColor: Color(0xffFCFCFC),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70),
         child: header(),

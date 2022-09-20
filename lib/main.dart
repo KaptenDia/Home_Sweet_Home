@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:home_sweet_home/pages/cart_page.dart';
 import 'package:home_sweet_home/pages/favorites_page.dart';
+import 'package:home_sweet_home/pages/forgot_password_page.dart';
 import 'package:home_sweet_home/pages/login_page.dart';
 import 'package:home_sweet_home/pages/main_page.dart';
 import 'package:home_sweet_home/pages/signup_page.dart';
@@ -40,6 +41,7 @@ class Main extends StatelessWidget {
           'home': (context) => const MainPage(),
           'FavoritesPage': (context) => FavoritesPage(),
           'CartPage': (context) => const CartPage(),
+          'ForgotPasswordPage': (context) => const ForgotPasswordPage(),
         },
       ),
     );

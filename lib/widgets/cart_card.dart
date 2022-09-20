@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_sweet_home/models/cart_model.dart';
 import 'package:home_sweet_home/providers/cart_provider.dart';
-import 'package:home_sweet_home/widgets/cart_counter.dart';
 import 'package:provider/provider.dart';
 
 import '../theme.dart';

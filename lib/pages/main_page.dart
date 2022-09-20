@@ -94,7 +94,7 @@ class _MainPageState extends State<MainPage> {
         return const HomePage();
         break;
       case 3:
-        return const ProfilePage();
+        return ProfilePage();
         break;
       default:
         return const HomePage();

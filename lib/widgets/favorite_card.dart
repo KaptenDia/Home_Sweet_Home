@@ -7,7 +7,10 @@ import '../providers/cart_provider.dart';
 import '../theme.dart';
 
 class FavoriteCard extends StatelessWidget {
-  FavoriteCard(this.product);
+  const FavoriteCard(
+    this.product, {
+    super.key,
+  });
   final Product product;
 
   @override

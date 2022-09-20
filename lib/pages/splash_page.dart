@@ -76,7 +76,7 @@ class SplashPage extends StatelessWidget {
                     ),
                     onPressed: () {
                       Navigator.pushNamedAndRemoveUntil(
-                          context, 'LoginPage', (route) => false);
+                          context, 'LoginPage', (route) => true);
                     },
                     child: Text(
                       'Get Started',

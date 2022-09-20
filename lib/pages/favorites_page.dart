@@ -7,6 +7,7 @@ import 'package:home_sweet_home/widgets/favorite_card.dart';
 import 'package:provider/provider.dart';
 
 import '../theme.dart';
+import 'detail_page.dart';
 
 class FavoritesPage extends StatelessWidget {
   const FavoritesPage({

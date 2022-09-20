@@ -1,7 +1,6 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:home_sweet_home/theme.dart';
 
@@ -254,7 +253,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   width: double.infinity,
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, 'ForgotPasswordPage');
+                    },
                     child: Text(
                       'Forgot Password',
                       style: descriptionTextStyle.copyWith(

@@ -1,8 +1,10 @@
 // ignore_for_file: sort_child_properties_last
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:home_sweet_home/theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../cubit/auth_cubit.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,8 +15,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   // text controller
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _emailController = TextEditingController(text: '');
+  final _passwordController = TextEditingController(text: '');
 
   Future signIn() async {
     try {
@@ -80,13 +82,45 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
 
   bool tap = false;
+
+  Widget loginButton() {
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return Container(
+          margin: const EdgeInsets.only(
+            top: 44,
+            left: 30,
+            right: 60,
+          ),
+          height: 50,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: blueColor,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: TextButton(
+            onPressed: signIn,
+            child: Text(
+              'Log in',
+              style: buttonTextStyle.copyWith(
+                fontSize: 18,
+                fontWeight: semiBold,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   Widget header() {
     return SafeArea(
@@ -266,29 +300,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(
-                    top: 44,
-                    left: 30,
-                    right: 60,
-                  ),
-                  height: 50,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: blueColor,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: TextButton(
-                    onPressed: signIn,
-                    child: Text(
-                      'Log in',
-                      style: buttonTextStyle.copyWith(
-                        fontSize: 18,
-                        fontWeight: semiBold,
-                      ),
-                    ),
-                  ),
-                ),
+                // SIGN IN BUTTON
+                loginButton(),
                 const SizedBox(
                   height: 30,
                 ),

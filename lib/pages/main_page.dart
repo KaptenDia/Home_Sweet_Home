@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:home_sweet_home/pages/favorites_page.dart';
 import 'package:home_sweet_home/pages/login_page.dart';
+import 'package:home_sweet_home/pages/notification_page.dart';
 import 'package:home_sweet_home/pages/profile_page.dart';
 import 'package:home_sweet_home/theme.dart';
 
@@ -91,7 +92,7 @@ class _MainPageState extends State<MainPage> {
         return FavoritesPage();
         break;
       case 2:
-        return const HomePage();
+        return const NotificationPage();
         break;
       case 3:
         return ProfilePage();

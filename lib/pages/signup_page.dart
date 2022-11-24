@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_sweet_home/cubit/auth_cubit.dart';
 
 import '../theme.dart';
 
@@ -21,6 +22,25 @@ class _SignupPageState extends State<SignupPage> {
 
   bool tap = false;
   bool tap2 = false;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  Future addUserDetails(String name, String email) async {
+    await FirebaseFirestore.instance.collection('users').add(
+      {
+        'name': name,
+        'email': email,
+      },
+    );
+  }
 
   Widget header() {
     return SafeArea(
@@ -233,43 +253,85 @@ class _SignupPageState extends State<SignupPage> {
                 controller: _confirmPasswordController,
                 validator: _confirmPasswordValidator,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(
-                      top: 45,
-                      left: 30,
-                      right: 60,
-                    ),
-                    height: 50,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: blueColor,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: TextButton(
-                      onPressed: () {
-                        if (_formKey.currentState != null &&
-                            _formKey.currentState!.validate()) {}
-                        signUp();
-                      },
-                      child: Text(
-                        'SIGN UP',
-                        style: buttonTextStyle.copyWith(
-                          fontSize: 18,
-                          fontWeight: bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              customButton(),
               footer(),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget customButton() {
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state is AuthSuccess) {
+          Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+        } else if (state is AuthFailed) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: warningColor,
+              content: Text(
+                state.error,
+                textAlign: TextAlign.center,
+                style: descriptionTextStyle.copyWith(
+                  fontWeight: bold,
+                  color: whiteColor,
+                ),
+              ),
+            ),
+          );
+        }
+      },
+      builder: (context, state) {
+        if (state is AuthLoading) {
+          return Container(
+            margin: EdgeInsets.only(
+              top: 10,
+            ),
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(
+                top: 45,
+                left: 30,
+                right: 60,
+              ),
+              height: 50,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: blueColor,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: TextButton(
+                onPressed: () {
+                  if (_formKey.currentState != null &&
+                      _formKey.currentState!.validate()) {}
+                  context.read<AuthCubit>().signUp(
+                        confirmPassword: _confirmPasswordController.text,
+                        email: _emailController.text,
+                        name: _nameController.text,
+                        password: _passwordController.text,
+                      );
+                },
+                child: Text(
+                  'SIGN UP',
+                  style: buttonTextStyle.copyWith(
+                    fontSize: 18,
+                    fontWeight: bold,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -289,106 +351,6 @@ class _SignupPageState extends State<SignupPage> {
       return 'Password don\' match';
     }
     return null;
-  }
-
-  Future signUp() async {
-    setState(() {});
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-
-      await FirebaseFirestore.instance.collection('users').add({
-        'email': _emailController.text,
-        'name': _nameController.text,
-      });
-
-      await showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(
-            'Sign up succeeded',
-            textAlign: TextAlign.center,
-            style: titleTextStyle.copyWith(
-              color: blueColor,
-              fontWeight: bold,
-            ),
-          ),
-          content: Text(
-            'Your account was created, you can now log in',
-            textAlign: TextAlign.center,
-            style: descriptionTextStyle,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, 'LoginPage', (route) => false);
-              },
-              child: Text(
-                'OK',
-                style: priceTextStyle,
-              ),
-            ),
-          ],
-        ),
-      );
-    } on FirebaseAuthException catch (e) {
-      _handleSignupError(e);
-      setState(() {});
-    }
-  }
-
-  void _handleSignupError(FirebaseAuthException e) {
-    String messageToDisplay;
-    switch (e.code) {
-      case 'email-already-in-use':
-        messageToDisplay = 'This email is already in use';
-        break;
-      case 'invalid-email':
-        messageToDisplay = 'This email you entered is invalid';
-        break;
-      case 'operation-not-allowed':
-        messageToDisplay = 'This operation is not allowed';
-        break;
-      case 'weak-password':
-        messageToDisplay = 'The password you entered is too weak';
-        break;
-      default:
-        messageToDisplay = 'An unknown error occurred';
-        break;
-    }
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          'Sign up failed',
-          textAlign: TextAlign.center,
-          style: titleTextStyle.copyWith(
-            color: blueColor,
-            fontWeight: bold,
-          ),
-        ),
-        content: Text(
-          messageToDisplay,
-          textAlign: TextAlign.center,
-          style: descriptionTextStyle,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text(
-              'OK',
-              style: priceTextStyle,
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
   Widget footer() {

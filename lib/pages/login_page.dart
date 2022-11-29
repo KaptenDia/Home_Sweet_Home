@@ -53,7 +53,8 @@ class _LoginPageState extends State<LoginPage> {
           ),
         );
       } else {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
@@ -90,36 +91,62 @@ class _LoginPageState extends State<LoginPage> {
   bool tap = false;
 
   Widget loginButton() {
-    return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
-      builder: (context, state) {
-        return Container(
-          margin: const EdgeInsets.only(
-            top: 44,
-            left: 30,
-            right: 60,
-          ),
-          height: 50,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: blueColor,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: TextButton(
-            onPressed: signIn,
-            child: Text(
-              'Log in',
-              style: buttonTextStyle.copyWith(
-                fontSize: 18,
-                fontWeight: semiBold,
-              ),
+    return BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
+      if (state is AuthSuccess) {
+        Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+      } else if (state is AuthFailed) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: warningColor,
+          content: Text(
+            state.error,
+            textAlign: TextAlign.center,
+            style: descriptionTextStyle.copyWith(
+              fontWeight: bold,
+              color: whiteColor,
             ),
           ),
+        ));
+      }
+    }, builder: (context, state) {
+      if (state is AuthLoading) {
+        return Container(
+          margin: EdgeInsets.only(
+            top: 10,
+          ),
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
         );
-      },
-    );
+      }
+      return Container(
+        margin: const EdgeInsets.only(
+          top: 44,
+          left: 30,
+          right: 60,
+        ),
+        height: 50,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: blueColor,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: TextButton(
+          onPressed: () {
+            signIn();
+            context.read<AuthCubit>().signIn(
+                email: _emailController.text,
+                password: _passwordController.text);
+          },
+          child: Text(
+            'Log in',
+            style: buttonTextStyle.copyWith(
+              fontSize: 18,
+              fontWeight: semiBold,
+            ),
+          ),
+        ),
+      );
+    });
   }
 
   Widget header() {

@@ -6,7 +6,7 @@ class UserModel extends Equatable {
   final String email;
 
   UserModel({
-    required this.id,
+    this.id = '',
     required this.name,
     required this.email,
   });

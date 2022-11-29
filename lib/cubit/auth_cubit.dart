@@ -43,8 +43,44 @@ class AuthCubit extends Cubit<AuthState> {
         case 'weak-password':
           messageToDisplay = 'The password you entered is too weak';
           break;
+        case 'confirm-password':
+          messageToDisplay = 'The password you entered is don\'t match';
+          break;
         default:
           messageToDisplay = 'Please check your field !';
+          break;
+      }
+
+      emit(
+        AuthFailed(messageToDisplay),
+      );
+    }
+  }
+
+  void signIn({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      emit(AuthLoading());
+
+      UserModel user = await AuthService().signIn(
+        email: email,
+        password: password,
+      );
+
+      emit(AuthSuccess(user));
+    } on FirebaseAuthException catch (e) {
+      String messageToDisplay;
+      switch (e.code) {
+        case 'invalid-email':
+          messageToDisplay = 'The email you entered is invalid';
+          break;
+        case 'wrong-password':
+          messageToDisplay = 'The password you entered is wrong';
+          break;
+        default:
+          messageToDisplay = 'Please check your email and password again !';
           break;
       }
 
